@@ -2,165 +2,325 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <title>生日快乐 🎉🌌</title>
+  <title>悦悦 27 岁生日快乐 🎂</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
-      overflow: hidden;
-      height: 100vh;
-      color: #fff;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    /* 星空背景 */
-    .stars {
-      width: 100%;
-      height: 100%;
-      background: #000;
-      background: radial-gradient(circle at 50% 20%, #222 0%, #000 80%);
-      position: fixed;
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC",
+        "Microsoft YaHei", sans-serif;
+      min-height: 100vh;
+      color: #fff;
       overflow: hidden;
-      top: 0; left: 0;
+      background: #000;
+    }
+
+    /* 背景图 */
+    .bg {
+      position: fixed;
+      inset: 0;
+      background: url("wslshengri.jpg") center center / cover no-repeat;
+      filter: brightness(0.7);
+      z-index: -2;
+    }
+
+    /* 轻微遮罩 */
+    .bg-overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 20% 0, rgba(0,0,0,0.1) 0, rgba(0,0,0,0.7) 65%);
       z-index: -1;
     }
 
-    /* 随机小星星 */
-    .star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: white;
-      border-radius: 50%;
-      opacity: 0.6;
-      animation: twinkle 3s infinite ease-in-out;
-    }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 1; }
-    }
-
-    /* 流星 */
-    .meteor {
-      position: absolute;
-      width: 2px;
-      height: 80px;
-      background: linear-gradient(white, rgba(255,255,255,0));
-      transform: rotate(-45deg);
-      animation: shoot 2s linear infinite;
-      opacity: 0.7;
-    }
-
-    @keyframes shoot {
-      0% {
-        transform: translate(0,0) rotate(-45deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translate(400px, 400px) rotate(-45deg);
-        opacity: 0;
-      }
-    }
-
-    /* 卡片主体 */
-    .card {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
+    /* 首页内容 */
+    .center-panel {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      padding: 28px 22px;
-      width: 85%;
-      max-width: 420px;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      box-shadow: 0 0 20px rgba(255,255,255,0.15);
+      padding: 24px 18px;
     }
 
-    h1 {
-      font-size: 30px;
-      margin-bottom: 10px;
-      color: #ffccff;
-      text-shadow: 0 0 8px #ff7bff;
+    .tag {
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      color: #ffd5f8;
     }
 
-    p {
-      font-size: 16px;
-      margin: 14px 0;
-      line-height: 1.6;
+    .title {
+      font-size: 26px;
+      margin-bottom: 6px;
+      text-shadow: 0 0 12px rgba(0,0,0,0.8);
     }
 
-    .btn {
-      margin-top: 16px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      background: linear-gradient(135deg, #ff77e9, #8f57ff);
-      color: white;
+    .subtitle {
       font-size: 15px;
-      box-shadow: 0 0 12px rgba(255, 140, 255, 0.6);
-      transition: 0.2s;
+      opacity: 0.9;
+      max-width: 260px;
+      margin: 0 auto 20px;
+      line-height: 1.6;
+      text-shadow: 0 0 12px rgba(0,0,0,0.8);
     }
 
-    .btn:active {
-      transform: scale(0.95);
-      filter: brightness(0.9);
+    .btn-main {
+      padding: 11px 26px;
+      border-radius: 999px;
+      border: none;
+      font-size: 15px;
+      background: linear-gradient(135deg, #ff8fd8, #ffbb57);
+      color: #33112a;
+      font-weight: 600;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.6);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
     }
 
+    .btn-main:active {
+      transform: translateY(1px) scale(0.97);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.7);
+      filter: brightness(0.96);
+    }
+
+    .tip-bottom {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      opacity: 0.8;
+      text-shadow: 0 0 8px rgba(0,0,0,0.8);
+    }
+
+    /* 信件弹层 */
+    .letter-wrap {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(0,0,0,0.7);
+      z-index: 10;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .letter-wrap.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .letter-card {
+      width: 100%;
+      max-width: 480px;
+      max-height: 90vh;
+      background: rgba(18,18,24,0.96);
+      border-radius: 18px;
+      padding: 18px 16px 14px;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.85);
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .letter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .letter-header-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .close-btn {
+      border: none;
+      background: transparent;
+      color: #aaa;
+      font-size: 18px;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+
+    .letter-body {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #f3f3f3;
+      padding-right: 4px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      flex: 1;
+    }
+
+    .letter-body p + p {
+      margin-top: 10px;
+    }
+
+    .letter-footer {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .btn-secondary {
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: none;
+      font-size: 14px;
+      background: linear-gradient(135deg, #6c8dff, #b08bff);
+      color: #fff;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .small-tip {
+      font-size: 11px;
+      color: #bbb;
+      text-align: center;
+      opacity: 0.85;
+    }
+
+    /* 视频区域 */
+    .video-area {
+      position: fixed;
+      inset: auto 0 0 0;
+      padding: 10px 12px 18px;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.4));
+      z-index: 9;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .video-area.active {
+      transform: translateY(0);
+    }
+
+    .video-title {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    video {
+      width: 100%;
+      border-radius: 14px;
+      background: #000;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.8);
+    }
+
+    @media (min-width: 768px) {
+      .title {
+        font-size: 30px;
+      }
+      .subtitle {
+        font-size: 16px;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="bg"></div>
+  <div class="bg-overlay"></div>
 
-  <!-- 星空背景 -->
-  <div class="stars" id="stars"></div>
+  <!-- 首页内容 -->
+  <div class="center-panel">
+    <div class="tag">HAPPY BIRTHDAY</div>
+    <div class="title">悦悦，27 岁生日快乐 🎂</div>
+    <div class="subtitle">
+      这是属于你的一点星光小惊喜，<br>
+      点开下面的按钮，收一封写给你的信吧 ✉️
+    </div>
+    <button class="btn-main" id="openLetterBtn">
+      <span>💌</span>
+      <span>开启互动</span>
+    </button>
 
-  <!-- 卡片主体 -->
-  <div class="card">
-    <h1>生日快乐 🎂✨</h1>
-    <p id="msg">愿你的世界永远闪烁着温柔的星光，<br>像今晚的星空一样浪漫又明亮 🌟</p>
-    <button class="btn" id="btn">点我领取生日愿望 💫</button>
+    <div class="tip-bottom">建议竖屏观看，效果更好哦 📱</div>
+  </div>
+
+  <!-- 信件弹层 -->
+  <div class="letter-wrap" id="letterWrap">
+    <div class="letter-card">
+      <div class="letter-header">
+        <div class="letter-header-title">Hello 悦悦 ✨</div>
+        <button class="close-btn" id="closeLetterBtn">✕</button>
+      </div>
+      <div class="letter-body">
+        <p>今天是你 27 岁的生日！虽然我知道最近的学习让你变得很焦虑，但今天请给自己内心放一个假吧，想象是在工作一样，下班了什么事情就和我没关系的心态度过一个生日吧！</p>
+
+        <p>最近的这一个月，又让我看到一个崭新的胡佳悦，像从内心深处迸发出来的坚韧和勇敢在前行。但这个过程一定不易，从一遍内心思想的折磨与煎熬，到依然坚持前行的过程，这在我看来更像是一次蜕变。虽然，你也会时常迷茫，问我舅爷说的“到底不在人下工作是啥意思”，也会考虑自己到底能不能上岸。但我认为你一定可以，你天生看着就像那种单位管人的哈哈哈，气场在哪放着没办法。</p>
+
+        <p>其次，27 岁生日，可能听起来会有一些惊讶，也可能会产生一些焦虑，觉得 27 怎么怎么样。但我觉得 27 应该不是被定义，而是重新定义自己的人生。在研究生毕业之前，我们都知道之后每个年龄应该在做什么，好像是已经固定好的例程一样，我们瞄着目标，众人认可的规划去前行。但到毕业之后的时间，突然没有固定要做的事情，我们对未知感到迷茫了，所以我感觉才会对年龄开始焦虑，如果说自己能够清楚自己想在某个年龄达到什么样子的自己，或许焦虑就变为了期待。</p>
+
+        <p>而在毕业后的时间中，有人结婚生子，有人为了生存选择自己专业不相关的工作，有人去读博等等。到现在我们人生变成了一个开放题，没有一个标准的模板，每一种选择也不一定比另一种更好，所以我们只要专注自己当下想做的事情就值得。</p>
+
+        <p>“人生不需要被意义撑起，只要被喜欢填满就好。”所有的努力，都会将我们带去想要的地方。</p>
+
+        <p>愿你在 27 岁路上，听从自己内心，迈着自己的步调，在困惑与顿悟中，一直往前！</p>
+
+        <p>祝最美丽的公主生日快乐！<br>阳。</p>
+      </div>
+
+      <div class="letter-footer">
+        <button class="btn-secondary" id="playSongBtn">
+          <span>🎵</span>
+          <span>最后，一起唱首生日歌吧</span>
+        </button>
+        <div class="small-tip">点一下下面的视频，如果没有自动播放的话～</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 视频区域 -->
+  <div class="video-area" id="videoArea">
+    <div class="video-title">🎂 生日歌 for 悦悦</div>
+    <video id="videoPlayer" controls playsinline webkit-playsinline>
+      <source src="wangsl.mp4" type="video/mp4" />
+      您的浏览器不支持视频播放。
+    </video>
   </div>
 
   <script>
-    /* 生成星空 */
-    const starContainer = document.getElementById("stars");
+    const openLetterBtn = document.getElementById("openLetterBtn");
+    const letterWrap = document.getElementById("letterWrap");
+    const closeLetterBtn = document.getElementById("closeLetterBtn");
+    const playSongBtn = document.getElementById("playSongBtn");
+    const videoArea = document.getElementById("videoArea");
+    const videoPlayer = document.getElementById("videoPlayer");
 
-    for (let i = 0; i < 150; i++) {
-      const s = document.createElement("div");
-      s.className = "star";
-      s.style.left = Math.random() * 100 + "vw";
-      s.style.top = Math.random() * 100 + "vh";
-      s.style.animationDelay = Math.random() * 3 + "s";
-      s.style.opacity = Math.random();
-      starContainer.appendChild(s);
-    }
+    openLetterBtn.addEventListener("click", () => {
+      letterWrap.classList.add("active");
+    });
 
-    /* 流星 */
-    function createMeteor() {
-      const m = document.createElement("div");
-      m.className = "meteor";
-      m.style.left = Math.random() * 100 + "vw";
-      m.style.top = Math.random() * -20 + "vh";
-      m.style.animationDuration = 1.8 + Math.random() * 1 + "s";
-      starContainer.appendChild(m);
+    closeLetterBtn.addEventListener("click", () => {
+      letterWrap.classList.remove("active");
+    });
 
-      setTimeout(() => m.remove(), 2500);
-    }
-
-    setInterval(createMeteor, 1500);
-
-    /* 点击祝福事件 */
-    const btn = document.getElementById("btn");
-    const msg = document.getElementById("msg");
-
-    btn.addEventListener("click", () => {
-      msg.innerHTML = "愿你所愿，皆能如愿；<br>愿你此生温柔有趣，永远被星光照亮 🌌✨";
+    // 点击“一起唱生日歌”
+    playSongBtn.addEventListener("click", () => {
+      videoArea.classList.add("active");
+      // 尝试自动播放，部分手机需要用户再次点播放键
+      videoPlayer.play().catch(() => {});
     });
   </script>
-
 </body>
 </html>
