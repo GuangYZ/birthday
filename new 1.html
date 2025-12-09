@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>生日快乐 🎉🌌</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      color: #fff;
+    }
+
+    /* 星空背景 */
+    .stars {
+      width: 100%;
+      height: 100%;
+      background: #000;
+      background: radial-gradient(circle at 50% 20%, #222 0%, #000 80%);
+      position: fixed;
+      overflow: hidden;
+      top: 0; left: 0;
+      z-index: -1;
+    }
+
+    /* 随机小星星 */
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: twinkle 3s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    /* 流星 */
+    .meteor {
+      position: absolute;
+      width: 2px;
+      height: 80px;
+      background: linear-gradient(white, rgba(255,255,255,0));
+      transform: rotate(-45deg);
+      animation: shoot 2s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes shoot {
+      0% {
+        transform: translate(0,0) rotate(-45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(400px, 400px) rotate(-45deg);
+        opacity: 0;
+      }
+    }
+
+    /* 卡片主体 */
+    .card {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      padding: 28px 22px;
+      width: 85%;
+      max-width: 420px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 20px rgba(255,255,255,0.15);
+    }
+
+    h1 {
+      font-size: 30px;
+      margin-bottom: 10px;
+      color: #ffccff;
+      text-shadow: 0 0 8px #ff7bff;
+    }
+
+    p {
+      font-size: 16px;
+      margin: 14px 0;
+      line-height: 1.6;
+    }
+
+    .btn {
+      margin-top: 16px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ff77e9, #8f57ff);
+      color: white;
+      font-size: 15px;
+      box-shadow: 0 0 12px rgba(255, 140, 255, 0.6);
+      transition: 0.2s;
+    }
+
+    .btn:active {
+      transform: scale(0.95);
+      filter: brightness(0.9);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- 星空背景 -->
+  <div class="stars" id="stars"></div>
+
+  <!-- 卡片主体 -->
+  <div class="card">
+    <h1>生日快乐 🎂✨</h1>
+    <p id="msg">愿你的世界永远闪烁着温柔的星光，<br>像今晚的星空一样浪漫又明亮 🌟</p>
+    <button class="btn" id="btn">点我领取生日愿望 💫</button>
+  </div>
+
+  <script>
+    /* 生成星空 */
+    const starContainer = document.getElementById("stars");
+
+    for (let i = 0; i < 150; i++) {
+      const s = document.createElement("div");
+      s.className = "star";
+      s.style.left = Math.random() * 100 + "vw";
+      s.style.top = Math.random() * 100 + "vh";
+      s.style.animationDelay = Math.random() * 3 + "s";
+      s.style.opacity = Math.random();
+      starContainer.appendChild(s);
+    }
+
+    /* 流星 */
+    function createMeteor() {
+      const m = document.createElement("div");
+      m.className = "meteor";
+      m.style.left = Math.random() * 100 + "vw";
+      m.style.top = Math.random() * -20 + "vh";
+      m.style.animationDuration = 1.8 + Math.random() * 1 + "s";
+      starContainer.appendChild(m);
+
+      setTimeout(() => m.remove(), 2500);
+    }
+
+    setInterval(createMeteor, 1500);
+
+    /* 点击祝福事件 */
+    const btn = document.getElementById("btn");
+    const msg = document.getElementById("msg");
+
+    btn.addEventListener("click", () => {
+      msg.innerHTML = "愿你所愿，皆能如愿；<br>愿你此生温柔有趣，永远被星光照亮 🌌✨";
+    });
+  </script>
+
+</body>
+</html>
